@@ -1,0 +1,13 @@
+.notfound { 
+    display: flex;
+    justify-content: center;
+    background-color: beige;
+    height: 100vh;
+    position: relative;
+    &__title {
+        font-size: 20px;
+        font-weight: bold;
+        position: absolute;
+        top: 50%;
+    }
+}

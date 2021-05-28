@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import "./App.scss";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import Layouts from "./components/Layout";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
+  const [isLogin, setIsLogin] = useState(true);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {isLogin === false ? (
+        <Switch>
+          <Route path="/login" exact>
+            <LoginPage />
+          </Route>
+          <Route path="/register" exact>
+            <RegisterPage />
+          </Route>
+          <Route path="">
+            <NotFoundPage></NotFoundPage>
+          </Route>
+        </Switch>
+      ) : (
+        <Layouts></Layouts>
+      )}
+    </Router>
   );
 }
 
