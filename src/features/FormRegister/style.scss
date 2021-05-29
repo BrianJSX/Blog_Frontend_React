@@ -9,4 +9,16 @@
         justify-content: center;
         font-weight: bold;
     }
+    animation: moveInLeft 1s ease-in backwards;
+}
+@keyframes moveInLeft {
+    0% { 
+        transform: translateX(-200px);
+    }
+    50% { 
+        transform: translateX(-50px);
+    }
+    100% {
+        transform: translateX(0)
+    }
 }

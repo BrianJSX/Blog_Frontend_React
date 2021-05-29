@@ -1,0 +1,9 @@
+.uiLoading { 
+    z-index: 999999;
+    height: 13rem;
+    width: 13rem;
+    position: fixed;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

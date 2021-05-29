@@ -1,28 +1,34 @@
-import { Alert, Button, Form, Input } from "antd";
-import React, { useState } from "react";
-import "./style.scss";
+import { Button, Form, Input } from "antd";
+import { pick } from "lodash";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
-
+import { toast } from 'react-toastify';
+import { fetchAccount } from "./registerSlice";
+import "./style.scss";
+ 
 
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
 };
+
 const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
 function FormRegister() {
-  const [data, setData] = useState();
-  const [errorPass, setErrorPass] = useState(false);
-
-  const onFinish = (values) => {
+  
+  const dispatch = useDispatch();
+  
+  const onFinish =  (values) => {
     if (values.password === values.repassword) {
-      setData(values);
-      console.log(data);
+      const validateValue = pick(values, ['login', 'password']);
+      dispatch(fetchAccount(validateValue));
     } else {
-      setErrorPass(true);
+      toast.error("Mật khẩu không khớp !", {
+        position: toast.POSITION.TOP_RIGHT
+      });;
     }
   };
 
@@ -33,7 +39,6 @@ function FormRegister() {
   return (
     <div className="formRegister">
       <div className="formRegister__title">Đăng Kí Tài Khoản</div>
-      {errorPass === true ? <Alert style={{marginTop: 20}} message="Mật khẩu không khớp" type="error" /> : ""}
       <Form
         {...layout}
         name="basic"
@@ -43,17 +48,9 @@ function FormRegister() {
         style={{ marginRight: 30, marginTop: 30 }}
       >
         <Form.Item
-          label="FirstName"
-          name="firstname"
+          label="Username"
+          name="login"
           rules={[{ required: true, message: "Please input your first name!" }]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="LastName"
-          name="lastname"
-          rules={[{ required: true, message: "Please input your last name!" }]}
         >
           <Input />
         </Form.Item>

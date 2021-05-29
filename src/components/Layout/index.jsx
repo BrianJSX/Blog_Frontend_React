@@ -3,7 +3,7 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import DashboardPage from "../../pages/DashboardPage";
 import MenuItem from "../Menu";
-import Header from '../Header';
+import HeaderLayout from "../Header";
 import "./style.scss";
 
 const { Content, Footer, Sider } = Layout;
@@ -11,16 +11,25 @@ const { Content, Footer, Sider } = Layout;
 function Layouts() {
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider collapsible>
+      <Sider>
+        <img
+          className="logo"
+          src="https://www.designevo.com/images/home/2-5-0/blue-shield-and-banner-emblem.webp"
+          alt=""
+        />
         <MenuItem></MenuItem>
       </Sider>
       <Layout className="site-layout">
-        <Header></Header>
+        <HeaderLayout></HeaderLayout>
         <Content style={{ margin: "0 16px" }}>
           <Switch>
-            <Redirect from="/login" to="/admin" />
-            <Redirect from="/register" to="/admin" />
-            <Route path="/admin">
+            <Redirect from="/" exact to="/dashboard"></Redirect>
+            <Redirect from="/login" to="/dashboard" />
+            <Redirect from="/register" to="/dashboard" />
+            <Route path="/dashboard">
+              <DashboardPage />
+            </Route>
+            <Route path="/category">
               <DashboardPage />
             </Route>
           </Switch>

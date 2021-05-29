@@ -1,5 +1,5 @@
 import { Button, Checkbox, Form, Input } from "antd";
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./style.scss";
 
@@ -10,17 +10,17 @@ const layout = {
 const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
+
 function FormLogin() {
-  const [account, setAccount] = useState();
 
   const onFinish = (values) => {
-    setAccount(values);
+
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-
+  
   return (
     <div className="formLogin">
       <div className="formLogin__title">Đăng Nhập Tài Khoản</div>
@@ -34,7 +34,7 @@ function FormLogin() {
       >
         <Form.Item
           label="Username"
-          name="username"
+          name="login"
           rules={[{ required: true, message: "Please input your username!" }]}
         >
           <Input />
