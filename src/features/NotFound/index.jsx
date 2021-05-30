@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.scss";
-import { Result, Button } from "antd";
+import { Result } from "antd";
 import { Link } from "react-router-dom";
 
 function NotFound() {

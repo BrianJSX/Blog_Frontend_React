@@ -3,9 +3,18 @@ import { Layout } from "antd";
 import "./style.scss";
 import { Button } from "antd";
 import Search from "../Search";
+import { useHistory } from "react-router";
 
 function HeaderLayout() {
   const { Header } = Layout;
+  const username = localStorage.getItem("username");
+  const history = useHistory();
+  
+  const onHandelLogout = async () => { 
+    await localStorage.removeItem("username");
+    await localStorage.removeItem("token");
+    return history.push('/login');
+  };
 
   return (
     <Header className="header">
@@ -13,9 +22,9 @@ function HeaderLayout() {
         <Search></Search>
       </div>
       <div className="header__action">
-        <div className="header__action__lable"> Admin</div>
+        <div className="header__action__lable"> {username} </div>
         <div className="header__action__button">
-          <Button type="primary">Logout</Button>
+          <Button onClick={onHandelLogout} type="primary">Logout</Button>
         </div>
       </div>
     </Header>

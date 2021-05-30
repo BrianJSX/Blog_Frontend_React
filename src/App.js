@@ -1,32 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import 'react-toastify/dist/ReactToastify.css';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch
+} from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
-import Layouts from "./components/Layout";
+import PrivateRoute from "./features/PrivateRoute";
 import UiLoading from "./features/UiLoading";
-import LoginPage from "./pages/LoginPage";
-import NotFoundPage from "./pages/NotFoundPage";
-import RegisterPage from "./pages/RegisterPage";
-import { ToastContainer } from 'react-toastify';
+import DashboardPage from "./pages/Dashboard/DashboardPage";
+import LoginPage from "./pages/Login/LoginPage";
+import RegisterPage from "./pages/Register/RegisterPage";
 
 function App() {
-  const [isLogin] = useState(false);
-  const [loading, setLoading] =  useState();
-  const uiLoading = useSelector((state) => state.uiLoading.loading );
+  const [loading, setLoading] = useState();
+  const uiLoading = useSelector((state) => state.uiLoading.loading);
 
   useEffect(() => {
-    const setLoadingIndex = () => { 
+    const setLoadingIndex = () => {
       setLoading(uiLoading);
-    }
+    };
     setLoadingIndex();
   });
 
   return (
-    <Router>
+    <div>
       <ToastContainer />
-      {loading && <UiLoading></UiLoading> }
-      {isLogin === false ? (
+      {loading && <UiLoading></UiLoading>}
+      <Router>
         <Switch>
           <Route path="/login" exact>
             <LoginPage />
@@ -34,14 +38,13 @@ function App() {
           <Route path="/register" exact>
             <RegisterPage />
           </Route>
-          <Route path="">
-            <NotFoundPage></NotFoundPage>
-          </Route>
+          <PrivateRoute>
+            <DashboardPage></DashboardPage>
+          </PrivateRoute>
+          <Redirect from="/" to="/login" exact></Redirect>
         </Switch>
-      ) : (
-        <Layouts></Layouts>
-      )}
-    </Router>
+      </Router>
+    </div>
   );
 }
 

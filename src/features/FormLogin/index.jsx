@@ -1,6 +1,9 @@
 import { Button, Checkbox, Form, Input } from "antd";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { fetchAccountLogin } from "./loginSlice";
+import { omit } from "lodash";
 import "./style.scss";
 
 const layout = {
@@ -12,15 +15,19 @@ const tailLayout = {
 };
 
 function FormLogin() {
-
+  const dispatch = useDispatch();
+  const history = useHistory();
+  
   const onFinish = (values) => {
-
+    const validateValues = omit(values, ["remember"]);
+    dispatch(fetchAccountLogin(validateValues));
+    history.push('/admin/dashboard');
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  
+
   return (
     <div className="formLogin">
       <div className="formLogin__title">Đăng Nhập Tài Khoản</div>
