@@ -2,11 +2,10 @@ import { Button, Form, Input } from "antd";
 import { pick } from "lodash";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import { fetchAccount } from "./registerSlice";
 import "./style.scss";
- 
 
 const layout = {
   labelCol: { span: 8 },
@@ -18,18 +17,16 @@ const tailLayout = {
 };
 
 function FormRegister() {
-  
   const dispatch = useDispatch();
-  const history = useHistory();
-  
-  const onFinish =  (values) => {
+
+  const onFinish = (values) => {
     if (values.password === values.repassword) {
-      const validateValue = pick(values, ['login', 'password']);
+      const validateValue = pick(values, ["login", "password"]);
       dispatch(fetchAccount(validateValue));
     } else {
       toast.error("Mật khẩu không khớp !", {
-        position: toast.POSITION.TOP_RIGHT
-      });;
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
   };
 

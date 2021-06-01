@@ -2,7 +2,7 @@ import { Col, Row } from "antd";
 import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import FormLogin from "../../features/FormLogin/index";
-
+import './style.scss';
 function Login() {
   const history = useHistory();
   const token = localStorage.getItem("token");

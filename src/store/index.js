@@ -4,7 +4,7 @@ import saga from '../saga/saga';
 import registerReducer from '../features/FormRegister/registerSlice';
 import loginReducer from '../features/FormLogin/loginSlice';
 import uiLoadingReducer from '../features/UiLoading/uiLoadingSlice';
-
+import categoryReducer from '../features/CategoryAdminList/categorySlice';
 
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [...getDefaultMiddleware({ serializableCheck: false, thunk: false }), sagaMiddleware];
@@ -15,6 +15,7 @@ export default configureStore({
         register: registerReducer,
         login: loginReducer,
         uiLoading: uiLoadingReducer,
+        category: categoryReducer
     },
     middleware,
     devTools: devMode,

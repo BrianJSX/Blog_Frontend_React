@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  Switch
+  Switch,
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,6 +14,8 @@ import UiLoading from "./features/UiLoading";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
 import LoginPage from "./pages/Login/LoginPage";
 import RegisterPage from "./pages/Register/RegisterPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import CategoryAdminPage from './pages/CategoryAdmin/CategoryAdminPage';
 
 function App() {
   const [loading, setLoading] = useState();
@@ -27,21 +29,27 @@ function App() {
   });
 
   return (
-    <div>
+    <div className="container">
       <ToastContainer />
       {loading && <UiLoading></UiLoading>}
       <Router>
         <Switch>
+          <Redirect from="/" to="/login" exact></Redirect>
           <Route path="/login" exact>
             <LoginPage />
           </Route>
           <Route path="/register" exact>
             <RegisterPage />
           </Route>
-          <PrivateRoute>
+          <PrivateRoute path="/admin/dashboard" exact>
             <DashboardPage></DashboardPage>
           </PrivateRoute>
-          <Redirect from="/" to="/login" exact></Redirect>
+          <PrivateRoute path="/admin/category" exact>
+            <CategoryAdminPage></CategoryAdminPage>
+          </PrivateRoute>
+          <Route path="">
+            <NotFoundPage></NotFoundPage>
+          </Route>
         </Switch>
       </Router>
     </div>

@@ -9,7 +9,7 @@ function NotFound() {
       status="404"
       title="404"
       subTitle="Sorry, the page you visited does not exist."
-      extra={<Link type="primary" to="/login">Quay lại trang đăng nhập</Link>}
+      extra={<Link type="primary" to="/login">Ấn để quay lại</Link>}
     />
   );
 }
