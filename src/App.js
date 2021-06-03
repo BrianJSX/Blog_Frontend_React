@@ -16,7 +16,7 @@ import LoginPage from "./pages/Login/LoginPage";
 import RegisterPage from "./pages/Register/RegisterPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import CategoryAdminPage from './pages/CategoryAdmin/CategoryAdminPage';
-
+import PostAdminPage from "./pages/PostAdmin/PostAdminPage";
 function App() {
   const [loading, setLoading] = useState();
   const uiLoading = useSelector((state) => state.uiLoading.loading);
@@ -46,6 +46,9 @@ function App() {
           </PrivateRoute>
           <PrivateRoute path="/admin/category" exact>
             <CategoryAdminPage></CategoryAdminPage>
+          </PrivateRoute>
+          <PrivateRoute path="/admin/post" exact>
+            <PostAdminPage></PostAdminPage>
           </PrivateRoute>
           <Route path="">
             <NotFoundPage></NotFoundPage>

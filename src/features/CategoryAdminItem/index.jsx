@@ -19,7 +19,7 @@ function CategoryAdminItem(props) {
       <td>{item.code}</td>
       <td>{item.name}</td>
       <td>
-        <Button type="primary">Sửa</Button>
+        <Button type="primary" onClick={() => props.onUpdateCate(item.id, item.code, item.name)}>Sửa</Button>
         <Popconfirm
           placement="topLeft"
           title="Bạn có muốn xóa danh mục này không ??"

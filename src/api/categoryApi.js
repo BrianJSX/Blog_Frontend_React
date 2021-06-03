@@ -14,7 +14,12 @@ const categoryApi = {
     removeCategory: (id) => {
         const url = `/admin/categories/${id}`;
         return axiosClient.delete(url);
-    }
+    },
+    updateCategory: (params) => {
+        const url = `/admin/categories/${params.id}`;
+        return axiosClient.put(url, params);
+    },
+
 };
 
 export default categoryApi;

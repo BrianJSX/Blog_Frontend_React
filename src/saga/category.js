@@ -1,4 +1,4 @@
-import { call, delay, fork, put, take, takeEvery } from "redux-saga/effects";
+import { call, delay, put, takeEvery } from "redux-saga/effects";
 import categoryApi from "../api/categoryApi";
 import {
   createCategory,
@@ -8,8 +8,11 @@ import {
   fetchCategoryFaild,
   fetchCategorySuccess,
   removeCategory,
-  removeCategorySuccess,
   removeCategoryFaild,
+  removeCategorySuccess,
+  updateCategory,
+  updateCategorySuccess,
+  updateCategoryFaild
 } from "../features/CategoryAdminList/categorySlice";
 import {
   hiddenLoading,
@@ -42,24 +45,41 @@ function* watchCreateCategoryAction({ payload }) {
   }
 }
 
-function* watchRemoveCategoryAction({payload}) {
-    try {
-        yield put(showLoading());
-        const resp = yield call(categoryApi.removeCategory, payload);
-        console.log(resp);
-        yield put(removeCategorySuccess());
-        yield put(fetchCategory());
-        yield delay(2000);
-        yield put(hiddenLoading());
-      } catch (error) {
-        yield put(removeCategoryFaild());
-        yield delay(2000);
-        yield put(hiddenLoading());
-      }
+function* watchRemoveCategoryAction({ payload }) {
+  try {
+    yield put(showLoading());
+    const resp = yield call(categoryApi.removeCategory, payload);
+    console.log(resp);
+    yield put(removeCategorySuccess());
+    yield put(fetchCategory());
+    yield delay(2000);
+    yield put(hiddenLoading());
+  } catch (error) {
+    yield put(removeCategoryFaild());
+    yield delay(2000);
+    yield put(hiddenLoading());
+  }
+}
+
+function* watchUpdateCategoryAction({ payload }) {
+  try {
+    yield put(showLoading());
+    const resp = yield call(categoryApi.updateCategory, payload);
+    console.log(resp);
+    yield put(updateCategorySuccess());
+    yield put(fetchCategory());
+    yield delay(2000);
+    yield put(hiddenLoading());
+  } catch (error) {
+    yield put(updateCategoryFaild());
+    yield delay(2000);
+    yield put(hiddenLoading());
+  }
 }
 
 export const categorySagas = [
   takeEvery(fetchCategory.type, watchFetchCategoryAction),
   takeEvery(createCategory.type, watchCreateCategoryAction),
   takeEvery(removeCategory.type, watchRemoveCategoryAction),
+  takeEvery(updateCategory.type, watchUpdateCategoryAction),
 ];

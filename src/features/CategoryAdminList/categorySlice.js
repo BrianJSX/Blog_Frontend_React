@@ -51,6 +51,19 @@ export const categorySlice = createSlice({
         position: toast.POSITION.TOP_RIGHT,
       });
     },
+    updateCategory: (state, action) => {
+      return state;
+    },
+    updateCategorySuccess: (state, action) => {
+      toast.success("Cập nhật danh mục thành công !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    },
+    updateCategoryFaild: (state, error) => {
+      toast.error("Cập nhật danh mục thất bại !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    },
   },
 });
 
@@ -63,7 +76,10 @@ export const {
     createCategoryFaild,
     removeCategory,
     removeCategorySuccess,
-    removeCategoryFaild
+    removeCategoryFaild,
+    updateCategory,
+    updateCategorySuccess,
+    updateCategoryFaild
 } = categorySlice.actions;
 
 export default categorySlice.reducer;

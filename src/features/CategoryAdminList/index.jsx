@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import CategoryItem from "../CategoryAdminItem";
 import "./style.scss";
 
-function CategoryAdminList(props) {
+function CategoryAdminList({onUpdate}) {
   const category = useSelector((state) => state.category.data);
   
   return (
@@ -25,6 +25,7 @@ function CategoryAdminList(props) {
                   key={index}
                   stt={index}
                   category={category}
+                  onUpdateCate={onUpdate}
                 ></CategoryItem>
               );
             })
@@ -37,4 +38,4 @@ function CategoryAdminList(props) {
   );
 }
 
-export default React.memo(CategoryAdminList);
+export default CategoryAdminList;

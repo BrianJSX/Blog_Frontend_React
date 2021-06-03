@@ -4,6 +4,7 @@ import "./style.scss";
 import { Button } from "antd";
 import Search from "../Search";
 import { useHistory } from "react-router";
+import { Avatar } from 'antd';
 
 function HeaderLayout() {
   const { Header } = Layout;
@@ -22,6 +23,9 @@ function HeaderLayout() {
         <Search></Search>
       </div>
       <div className="header__action">
+        <div className="header__action__avatar">    
+          <Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>{username}</Avatar>
+        </div>
         <div className="header__action__lable"> {username} </div>
         <div className="header__action__button">
           <Button onClick={onHandelLogout} type="primary">Logout</Button>
