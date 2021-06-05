@@ -1,0 +1,29 @@
+#post {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  overflow: auto;
+  margin: 0 2rem;
+}
+
+#post td,
+#post th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#post tr:nth-child(even) {
+  background-color: #fff;
+}
+
+#post tr:hover {
+  background-color: #ddd;
+}
+
+#post th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #110822;
+  color: white;
+}
