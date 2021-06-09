@@ -11,6 +11,7 @@ function HeaderIndex() {
   const categories = useSelectCategory();
   const history = useHistory();
   const username = localStorage.getItem("username");
+  const checkRole = localStorage.getItem("role");
 
   const suffix = (
     <AudioOutlined
@@ -20,10 +21,11 @@ function HeaderIndex() {
       }}
     />
   );
-  const onHandelLogout = async () => { 
+  const onHandelLogout = async () => {
     await localStorage.removeItem("username");
     await localStorage.removeItem("token");
-    return history.push('/login');
+    await localStorage.removeItem("role");
+    return history.push("/login");
   };
 
   return (
@@ -39,7 +41,18 @@ function HeaderIndex() {
             <span style={{ marginLeft: 5 }}>{username}</span>
           </div>
           <div className="header-account__action">
-            <Button type="primary" onClick={onHandelLogout}> Logout</Button>
+            <Button type="primary" onClick={onHandelLogout}>
+              Logout
+            </Button>
+            {checkRole != null && checkRole == "ROLE_ADMIN" ? (
+              <Link to="/admin">
+                <Button type="primary" style={{ marginLeft: 10 }}>
+                  Trang quản lý
+                </Button>
+              </Link>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <ul className="header-ul">

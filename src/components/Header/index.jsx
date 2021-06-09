@@ -14,6 +14,7 @@ function HeaderLayout() {
   const onHandelLogout = async () => { 
     await localStorage.removeItem("username");
     await localStorage.removeItem("token");
+    await localStorage.removeItem("role");
     return history.push('/login');
   };
 

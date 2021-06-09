@@ -18,6 +18,7 @@ export const loginSlice = createSlice({
         },
         fetchAccountLoginSuccess: (state, action) => {
             localStorage.setItem("token", action.payload.token);
+            localStorage.setItem("role", action.payload.user.roleEntity.name);
             toast.success(action.payload.message, {
                 position: toast.POSITION.TOP_RIGHT,
             });

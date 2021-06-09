@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
 import PrivateRoute from "./features/PrivateRoute";
+import PrivateRouteAdmin from "./features/PrivateRouteAdmin";
 import UiLoading from "./features/UiLoading";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
 import LoginPage from "./pages/Login/LoginPage";
@@ -40,33 +41,42 @@ function App() {
         <Switch>
           <Redirect from="/" to="/home" exact></Redirect>
           <Redirect from="/admin" to="/admin/dashboard" exact></Redirect>
+          
           <PrivateRoute path="/home" exact>
             <HomePage />
           </PrivateRoute>
+
           <PrivateRoute path="/home/category/:categoryCode" exact>
             <CategoryIndex />
           </PrivateRoute>
+
           <PrivateRoute path="/home/post/:newsId" exact>
             <PostDetail />
           </PrivateRoute>
+          
           <Route path="/login" exact>
             <LoginPage />
           </Route>
           <Route path="/register" exact>
             <RegisterPage />
           </Route>
-          <PrivateRoute path="/admin/dashboard" exact>
+
+          <PrivateRouteAdmin path="/admin/dashboard" exact>
             <DashboardPage></DashboardPage>
-          </PrivateRoute>
-          <PrivateRoute path="/admin/category" exact>
+          </PrivateRouteAdmin>
+
+          <PrivateRouteAdmin path="/admin/category" exact>
             <CategoryAdminPage></CategoryAdminPage>
-          </PrivateRoute>
-          <PrivateRoute path="/admin/post" exact>
+          </PrivateRouteAdmin>
+
+          <PrivateRouteAdmin path="/admin/post" exact>
             <PostAdminPage></PostAdminPage>
-          </PrivateRoute>
+          </PrivateRouteAdmin>
+
           <Route path="">
             <NotFoundPage></NotFoundPage>
           </Route>
+
         </Switch>
       </Router>
     </div>
