@@ -6,7 +6,16 @@ import { removePost } from "../PostAdminList/postSlice";
 function PostAdminItem(props) {
   const stt = props.stt;
   const post = props.post;
+  const news = props.news;
   const dispatch = useDispatch();
+
+  const dataPost = {
+    id: news.id,
+    title: news.title,
+    shortDescription: news.shortDescription,
+    content : news.content,
+    category_id: post.id
+  }
 
   const confirm = (id) => {
       dispatch(removePost(id));
@@ -15,14 +24,15 @@ function PostAdminItem(props) {
   return (
     <tr>
       <td>{stt + 1}</td>
-      <td>{post.title}</td>
-      <td>{post.shortDescription}</td>
+      <td>{news.title}</td>
+      <td>{news.shortDescription}</td>
+      <td>{post.name}</td>
       <td>
-        <Button type="primary">Sửa</Button>
+        <Button onClick={() => props.onUpdate(dataPost)} type="primary">Sửa</Button>
         <Popconfirm
           placement="topRight"
           title="Bạn có muốn xóa bài viết này không??"
-          onConfirm={() => confirm(post.id)}
+          onConfirm={() => confirm(news.id)}
           okText="Yes"
           cancelText="No"
         >

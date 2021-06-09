@@ -10,7 +10,10 @@ import {
   fetchPostFaild,
   removePost,
   removePostSuccess,
-  removePostFaild
+  removePostFaild,
+  updatePost,
+  updatePostSuccess,
+  updatePostFaild
 } from "../features/PostAdminList/postSlice";
 import {
   hiddenLoading,
@@ -56,8 +59,24 @@ function* watchRemovePostAction({payload}) {
   }
 }
 
+function* watchUpdatePostAction({payload}) {
+  try {
+    yield put(showLoading());
+    yield call(postApi.updatePost, payload);
+    yield put(updatePostSuccess());
+    yield put(fetchPost());
+    yield delay(2000);
+    yield put(hiddenLoading());
+  } catch (error) {
+    yield put(updatePostFaild());
+    yield delay(2000);
+    yield put(hiddenLoading());
+  }
+}
+
 export const postSagas = [
   takeEvery(createPost.type, watchCreatePostAction),
   takeEvery(fetchPost.type, watchFetchPostAction),
-  takeEvery(removePost.type, watchRemovePostAction)
+  takeEvery(removePost.type, watchRemovePostAction),
+  takeEvery(updatePost.type, watchUpdatePostAction)
 ];

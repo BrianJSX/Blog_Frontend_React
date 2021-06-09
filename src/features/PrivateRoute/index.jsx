@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, Route } from "react-router";
 
 function PrivateRoute({ children, ...rest }) {
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   return (
     <Route {...rest} render={({ location }) => token != null ? (
           children

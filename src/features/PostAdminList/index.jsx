@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import PostAdminItem from "../PostAdminItem";
 import "./style.scss";
 
-function PostAdminList() {
+function PostAdminList({ onUpdate }) {
   const posts = useSelector((state) => state.post.data);
 
   return (
@@ -14,13 +14,24 @@ function PostAdminList() {
             <th>id</th>
             <th>Tên bài viết</th>
             <th>Mô tả ngắn</th>
+            <th>Tên danh mục</th>
             <th>Hành động</th>
           </tr>
         </thead>
         <tbody>
           {posts !== null
-            ? posts.map((posts, index) => {
-                return <PostAdminItem key={index} post={posts} stt={index}></PostAdminItem>;
+            ? posts.map((post, index) => {
+                return post.news.map((news, index) => {
+                  return (
+                    <PostAdminItem
+                      onUpdate={onUpdate}
+                      key={index}
+                      post={post}
+                      news={news}
+                      stt={index}
+                    ></PostAdminItem>
+                  );
+                });
               })
             : ""}
         </tbody>

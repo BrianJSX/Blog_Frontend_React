@@ -1,0 +1,58 @@
+.header {
+  &-account {
+    display: flex;
+    margin-left: 2rem;
+    color: rgb(158, 158, 158);
+    align-items: center;
+  }
+  &-account__info {
+    padding-right: 2rem;
+  }
+
+  &-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 25%;
+    border-right: 1px solid rgb(158, 158, 158);;
+    padding-top: 20px;
+    background-color: #fff;
+  }
+  &-ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  &-li {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0.5rem;
+    color: rgb(78, 78, 78);;
+    &:hover {
+      font-size: 30px;
+      color: rgb(19, 179, 207);
+    }
+  }
+  &-logo {
+    position: absolutes;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  &-subcribe {
+    color: rgb(158, 158, 158);;
+    margin: 3rem .4rem;
+    &__title { 
+      font-size: 1.2rem;
+      padding: 1rem
+    }
+  }
+  &-copyright { 
+    display: flex;
+    justify-content: center;
+    color:rgb(158, 158, 158)
+  }
+}

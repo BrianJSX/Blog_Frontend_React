@@ -1,0 +1,81 @@
+.footer {
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 22%;
+  background-color: rgb(238, 238, 238);
+  color: gray;
+  &--content {
+    overflow-y: scroll;
+    height: 250px;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+  }
+  &__search {
+    display: flex;
+    justify-content: center;
+    margin: 2rem;
+  }
+  &__category {
+    height: 150px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+    &-title {
+      display: flex;
+      justify-content: center;
+      font-size: 25px;
+    }
+    &-ul {
+      list-style-type: none;
+      margin-top: 40px;
+      padding: 0;
+    }
+    &-li {
+      font-size: 15px;
+      font-weight: 600;
+      border-bottom: 1px solid gray;
+      margin: 15px;
+      display: flex;
+      justify-content: space-between;
+      &:hover {
+        color: rgb(20, 219, 245);
+      }
+    }
+  }
+  &__post {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    &__main {
+      &-title {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        &:hover { 
+            color: rgb(20, 219, 245);
+        }
+      }
+      &-date {
+        display: flex;
+        align-items: center;
+        line-height: 0;
+      }
+      &-author {
+        display: flex;
+        align-items: center;
+        line-height: 0;
+      }
+    }
+  }
+  &__info {
+  }
+}

@@ -1,0 +1,30 @@
+.postDetail {
+    &__header{
+        display: flex;
+        align-items: center;
+        background-color: rgb(214, 214, 214);
+        padding: 20px;
+        &__main {
+            &-date {
+                display: flex;
+                align-items: center;
+                line-height: 0;
+                margin-top: 20px;
+                margin-bottom: 15px
+            }
+            &-title { 
+                display:flex;
+                font-size: 20px;
+                font-weight: 600;
+            }
+            &-author { 
+                display: flex;
+                align-items: center;
+                line-height: 0;
+            }
+        }
+    }
+    &__main {
+
+    }
+}

@@ -1,10 +1,10 @@
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { Button, Form, Input, Select } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import useFetchCategory from "../../hooks/useFetchCategory";
-import { createPost } from "../PostAdminList/postSlice";
+import { createPost, updatePost } from "../PostAdminList/postSlice";
 import "./style.scss";
 
 const layout = {
@@ -23,15 +23,34 @@ const tailLayout = {
   },
 };
 
-function PostAdminList() {
+function PostAdminList({ dataPost, onResetPost }) {
   const [form] = Form.useForm();
   const { Option } = Select;
   const dispatch = useDispatch();
-
   const category = useFetchCategory();
 
+  useEffect(() => {
+    if (dataPost != null) {
+      form.setFieldsValue({
+        news_id: dataPost.id,
+        title: dataPost.title,
+        shortDescription: dataPost.shortDescription,
+        content: dataPost.content,
+        category_id: dataPost.category_id,
+      });
+    } else { 
+      form.resetFields();
+    }
+  }, [dataPost]);
+
   const onFinish = (values) => {
-    dispatch(createPost(values));
+    if(dataPost != null ) { 
+      dispatch(updatePost(values));
+      onResetPost()
+    } else { 
+      dispatch(createPost(values));
+      onResetPost()
+    }
   };
 
   const onChangeSelect = (value) => {
@@ -43,6 +62,13 @@ function PostAdminList() {
   return (
     <div className="postAdd">
       <div className="postAdd-form">
+        {dataPost != null ? (
+          <Button style={{margin: 20}} type="primary" onClick={onResetPost}>
+            Ấn để thêm bài viết
+          </Button>
+        ) : (
+          ""
+        )}
         <Form
           style={{ width: 1000 }}
           layout="horizontal"
@@ -51,6 +77,22 @@ function PostAdminList() {
           name="control-hooks"
           onFinish={onFinish}
         >
+          {dataPost != null ? (
+            <Form.Item
+              name="news_id"
+              label="ID bài viết"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input disabled={true} />
+            </Form.Item>
+          ) : (
+            ""
+          )}
+
           <Form.Item
             name="title"
             label="Tiêu đề"
@@ -114,11 +156,7 @@ function PostAdminList() {
           >
             <CKEditor
               editor={ClassicEditor}
-              data="<p>Hello from CKEditor 5!</p>"
-              onReady={(editor) => {
-                // You can store the "editor" and use when it is needed.
-                console.log("Editor is ready to use!", editor);
-              }}
+              data={dataPost != null ? dataPost.content : ""}
               onBlur={(event, editor) => {
                 const data = editor.getData();
                 form.setFieldsValue({
@@ -133,7 +171,6 @@ function PostAdminList() {
               Submit
             </Button>
           </Form.Item>
-
         </Form>
       </div>
     </div>

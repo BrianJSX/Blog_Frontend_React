@@ -19,6 +19,11 @@ const categoryApi = {
         const url = `/admin/categories/${params.id}`;
         return axiosClient.put(url, params);
     },
+    getAllCategoryIndex: () => {
+        const url = "/categories";
+        return axiosClient.get(url);
+    },
+
 
 };
 

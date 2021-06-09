@@ -47,6 +47,19 @@ export const postSlice = createSlice({
       toast.error("Xóa bài viết thất bại", {
         position: toast.POSITION.TOP_RIGHT,
       });
+    },
+    updatePost: (state, action) => {
+      return state;
+    },
+    updatePostSuccess: (state, action) => {
+      toast.success("cập nhật bài viết thành công", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    },
+    updatePostFaild: (state, error) => {
+      toast.error("cập nhật bài viết thất bại", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     },  
   },
 });
@@ -60,7 +73,10 @@ export const {
     fetchPostFaild,
     removePost,
     removePostSuccess,
-    removePostFaild
+    removePostFaild,
+    updatePost,
+    updatePostSuccess,
+    updatePostFaild
 } = postSlice.actions;
 
 export default postSlice.reducer;
